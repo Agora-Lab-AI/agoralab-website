@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Clock, MapPin, Zap, Brain, Code, Server, Rocket, Github, ExternalLink } from 'lucide-react'
+import { Clock, MapPin, Zap, Brain, Code, Server, Rocket, Github, ExternalLink, ArrowLeft } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -44,10 +44,18 @@ export default function CareersPage() {
     { title: "Infrastructure Engineer", description: "Build and maintain our high-performance computing infrastructure" },
     { title: "Open Source Advocate", description: "Manage our open-source projects and community engagement" }
   ]
+  
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
       <header className="fixed top-0 left-0 right-0 bg-white bg-opacity-90 backdrop-blur-md z-50 transition-all duration-300">
         <nav className="container mx-auto px-4 py-3">
+          <a
+            href="/"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 text-blue-600 hover:text-blue-800 transition-colors p-2 border border-blue-200 rounded-lg hover:border-blue-400 group"
+            title="Back to Home"
+          >
+            <ArrowLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+          </a>
           <ul className="flex flex-wrap justify-center gap-4 text-center">
             {Object.keys(sectionRefs).map((section) => (
               <li key={section}>

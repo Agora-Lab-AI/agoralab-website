@@ -81,7 +81,7 @@ export default function Page() {
               Advancing Humanity with Open-Source AI Research
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-blue-800">
-              Premier Open Source & Decentralized AI Research Lab
+              Agora is an open-source AI research lab that builds and trains novel foundation models.
             </p>
             <a
               href="https://discord.gg/qUtxnK2NMf"

@@ -11,19 +11,42 @@ export default function Page() {
   const { scrollYProgress } = useScroll()
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+  const reposPerPage = 12 // Show 4 rows of 3 repos
 
   useEffect(() => {
     const fetchRepos = async () => {
       const orgs = ['Agora-Lab-AI', 'kyegomez', 'The-Swarm-Corporation']
-      const allRepos: any = await Promise.all(orgs.map(async (org) => {
-        const response = await fetch(`https://api.github.com/users/${org}/repos?sort=stars&per_page=3`)
-        const data = await response.json()
-        return data.map(repo => ({ ...repo, org }))
-      }))
-      setRepos(allRepos.flat())
+      try {
+        setIsLoading(true)
+        const allRepos: any = await Promise.all(orgs.map(async (org) => {
+          const response = await fetch(`https://api.github.com/users/${org}/repos?per_page=100`)
+          const data = await response.json()
+          return data.map(repo => ({ ...repo, org }))
+        }))
+
+        const sortedRepos = allRepos
+          .flat()
+          .sort((a, b) => b.stargazers_count - a.stargazers_count)
+
+        setRepos(sortedRepos)
+      } catch (error) {
+        console.error('Error fetching repos:', error)
+        setRepos([])
+      } finally {
+        setIsLoading(false)
+      }
     }
     fetchRepos()
   }, [])
+
+
+  // Calculate pagination
+  const indexOfLastRepo = currentPage * reposPerPage
+  const indexOfFirstRepo = indexOfLastRepo - reposPerPage
+  const currentRepos = repos.slice(indexOfFirstRepo, indexOfLastRepo)
+  const totalPages = Math.ceil(repos.length / reposPerPage)
 
   return (
     <div className="min-h-screen bg-white text-blue-900">
@@ -159,38 +182,87 @@ export default function Page() {
         </section>
 
         <section id="projects" className="py-20">
-          <h3 className="text-3xl font-bold mb-8 text-center text-blue-800">Our Projects</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {repos.map((repo: any, index: number) => (
-              <motion.div
-                key={repo.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="bg-white shadow-md hover:shadow-xl transition-shadow">
-                  <CardHeader>
-                    <CardTitle className="text-xl font-semibold text-blue-700">{repo.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-blue-600 mb-4">{repo.description}</p>
-                    <p className="text-sm">
-                      <span className="text-yellow-600 mr-2">★ {repo.stargazers_count}</span>
-                      <span className="text-blue-500">{repo.language}</span>
-                    </p>
-                  </CardContent>
-                  <CardFooter className="flex justify-between">
-                    <span className="text-sm text-blue-400">{repo.org}</span>
-                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                      <Github className="inline mr-1" size={16} />
-                      View on GitHub
-                    </a>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+          <h3 className="text-3xl font-bold mb-8 text-center text-blue-800">
+            Our Projects
+            <span className="text-lg ml-2 text-blue-600">({repos.length} total)</span>
+          </h3>
+          
+          {isLoading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {currentRepos.map((repo: any, index: number) => (
+                  <motion.div
+                    key={repo.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="bg-white shadow-md hover:shadow-xl transition-shadow">
+                      <CardHeader>
+                        <CardTitle className="text-xl font-semibold text-blue-700">{repo.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm text-blue-600 mb-4">{repo.description}</p>
+                        <p className="text-sm">
+                          <span className="text-yellow-600 mr-2">★ {repo.stargazers_count}</span>
+                          <span className="text-blue-500">{repo.language}</span>
+                        </p>
+                      </CardContent>
+                      <CardFooter className="flex justify-between">
+                        <span className="text-sm text-blue-400">{repo.org}</span>
+                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
+                          <Github className="inline mr-1" size={16} />
+                          View on GitHub
+                        </a>
+                      </CardFooter>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="mt-12 flex justify-center gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  Previous
+                </Button>
+                
+                <div className="flex gap-2 items-center">
+                  {[...Array(totalPages)].map((_, idx) => (
+                    <Button
+                      key={idx}
+                      variant={currentPage === idx + 1 ? "default" : "outline"}
+                      onClick={() => setCurrentPage(idx + 1)}
+                      className="w-10 h-10"
+                    >
+                      {idx + 1}
+                    </Button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                </Button>
+              </div>
+
+              {/* Showing results count */}
+              <p className="text-center mt-4 text-blue-600">
+                Showing {indexOfFirstRepo + 1}-{Math.min(indexOfLastRepo, repos.length)} of {repos.length} repositories
+              </p>
+            </>
+          )}
         </section>
 
         <section id="join" className="py-20 text-center">

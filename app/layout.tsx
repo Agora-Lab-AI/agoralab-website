@@ -54,7 +54,6 @@ export default function RootLayout({
       <body className="antialiased min-h-screen w-full overflow-x-hidden">
         <main className="w-full min-h-screen flex flex-col">
           <div className="w-full max-w-[2000px] mx-auto px-6 sm:px-8 lg:px-12 flex-grow">
-            {/* <Navbar /> */}
             {children}
             <Footer />
           </div>

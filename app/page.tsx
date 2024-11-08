@@ -93,6 +93,33 @@ export default function Page() {
           </motion.div>
         </section>
 
+        <section id="about" className="py-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              { title: "~9,000", subtitle: "Community Members", color: "blue" },
+              { title: "1000+", subtitle: "Foundation Models Built", color: "indigo" },
+              { title: "100+", subtitle: "Papers Implemented", color: "sky" }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Card className={`bg-${item.color}-50 border-${item.color}-200 border-2 hover:shadow-lg transition-shadow`}>
+                  <CardHeader>
+                    <CardTitle className={`text-4xl font-bold text-${item.color}-600`}>{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-lg text-blue-800">{item.subtitle}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         <section id="values" className="py-20 bg-blue-50">
           <h3 className="text-3xl font-bold mb-12 text-center text-blue-800">Our Values</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -128,33 +155,6 @@ export default function Page() {
               <h4 className="text-xl font-bold text-blue-700 mb-4">Global Community</h4>
               <p className="text-blue-600">From Palo Alto to Miami, we host hackathons and events worldwide, bringing together the brightest minds in AI research.</p>
             </motion.div>
-          </div>
-        </section>
-
-        <section id="about" className="py-20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {[
-              { title: "~9,000", subtitle: "Community Members", color: "blue" },
-              { title: "1000+", subtitle: "Foundation Models Built", color: "indigo" },
-              { title: "100+", subtitle: "Papers Implemented", color: "sky" }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Card className={`bg-${item.color}-50 border-${item.color}-200 border-2 hover:shadow-lg transition-shadow`}>
-                  <CardHeader>
-                    <CardTitle className={`text-4xl font-bold text-${item.color}-600`}>{item.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-lg text-blue-800">{item.subtitle}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
           </div>
         </section>
 

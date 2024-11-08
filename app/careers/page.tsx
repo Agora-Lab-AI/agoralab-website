@@ -74,10 +74,10 @@ export default function CareersPage() {
         <section id="hero" ref={sectionRefs.hero} className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
           <motion.div style={{ opacity, scale }} className="text-center">
             <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-              Join the AI Revolution
+              Advance Humanity with Novel AI Research
             </h1>
             <p className="text-xl md:text-2xl mb-12 text-gray-600">
-              Shape the future of AI at Agora Lab
+              Shape Humanitys future with all-new foundation models and cutting-edge research!
             </p>
             <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8 py-4 text-lg">
               <a href="#apply">Apply Now</a>

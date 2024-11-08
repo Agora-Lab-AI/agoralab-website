@@ -78,7 +78,7 @@ export default function Page() {
             className="text-center z-10 px-4"
           >
             <h2 className="text-4xl sm:text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600">
-              The Future of AI Research
+              Advancing Humanity with Open-Source AI Research
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl mb-8 text-blue-800">
               Premier Open Source & Decentralized AI Research Lab

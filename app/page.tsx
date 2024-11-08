@@ -56,6 +56,7 @@ export default function Page() {
           <a href="#values" className="hover:text-blue-600 transition-colors">Values</a>
           <a href="#projects" className="hover:text-blue-600 transition-colors">Projects</a>
           <a href="#join" className="hover:text-blue-600 transition-colors">Join Us</a>
+          <a href="/blog" className="hover:text-blue-600 transition-colors">Blog</a>
         </nav>
       </header>
 

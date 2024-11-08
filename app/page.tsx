@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Github, Twitter, ExternalLink, ChevronDown } from 'lucide-react'
+import { Github, Twitter, ExternalLink, ChevronDown, Brain, Code, Server, Rocket } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+
 
 export default function Page() {
   const [repos, setRepos] = useState([])
@@ -40,6 +41,15 @@ export default function Page() {
     }
     fetchRepos()
   }, [])
+
+
+  const sectionRefs = {
+    hero: useRef(null),
+    about: useRef(null),
+    benefits: useRef(null),
+    positions: useRef(null),
+    apply: useRef(null),
+  }
 
 
   // Calculate pagination
@@ -141,6 +151,43 @@ export default function Page() {
                 </Card>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+
+        <section id="about" ref={sectionRefs.about} className="py-24 bg-white">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-12 text-center">About Agora Lab</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <Card className="bg-gradient-to-br from-blue-50 to-white border-none shadow-lg">
+                <CardContent className="p-8">
+                  <Brain className="w-12 h-12 text-blue-600 mb-4" />
+                  <h3 className="text-2xl font-semibold mb-4">All-New AI Research</h3>
+                  <p className="text-gray-600">We're at the forefront of AI innovation, constantly pushing the boundaries of what's possible.</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-purple-50 to-white border-none shadow-lg">
+                <CardContent className="p-8">
+                  <Code className="w-12 h-12 text-purple-600 mb-4" />
+                  <h3 className="text-2xl font-semibold mb-4">Open Source Foundation Models</h3>
+                  <p className="text-gray-600">We build and train cutting-edge foundation models, making them accessible to the world.</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-green-50 to-white border-none shadow-lg">
+                <CardContent className="p-8">
+                  <Server className="w-12 h-12 text-green-600 mb-4" />
+                  <h3 className="text-2xl font-semibold mb-4">High-Performance Training</h3>
+                  <p className="text-gray-600">Our state-of-the-art infrastructure allows us to train models at unprecedented scales.</p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gradient-to-br from-yellow-50 to-white border-none shadow-lg">
+                <CardContent className="p-8">
+                  <Rocket className="w-12 h-12 text-yellow-600 mb-4" />
+                  <h3 className="text-2xl font-semibold mb-4">Rapid Innovation</h3>
+                  <p className="text-gray-600">We move fast, iterate quickly, and aren't afraid to challenge the status quo.</p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
 

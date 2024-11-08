@@ -20,7 +20,7 @@ export default function Footer() {
     <li className="w-full">
       <a
         href={href}
-        className="flex w-full items-center justify-between rounded-md bg-neutral-100 px-4 py-3 text-sm transition-all hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+        className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-blue-600 bg-white border border-blue-100 transition-all hover:bg-blue-50 hover:border-blue-200 hover:shadow-sm"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -32,53 +32,54 @@ export default function Footer() {
 
   const CategorySection = ({ title, children }: { title: string; children: React.ReactNode }) => (
     <div className="mb-8">
-      <h3 className="mb-4 text-lg font-semibold text-neutral-800 dark:text-neutral-200">{title}</h3>
-      <ul className="space-y-2">{children}</ul>
+      <h3 className="mb-6 text-lg font-semibold text-blue-900">{title}</h3>
+      <ul className="space-y-3">{children}</ul>
     </div>
   );
 
   return (
-    <footer className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <CategorySection title="Connect">
-          <LinkButton href="https://github.com/kyegomez" text="GitHub" />
-          <LinkButton href="https://x.com/KyeGomezB" text="Twitter/X" />
-          <LinkButton href="https://discord.gg/agora-999382051935506503" text="Discord" />
-          <LinkButton href="https://www.youtube.com/@kyegomez3242" text="YouTube" />
-          <LinkButton href="https://www.instagram.com/kye_gomez/" text="Instagram" />
-          <LinkButton href="https://www.linkedin.com/in/kye-g-38759a207/" text="Linkedin" />
-        </CategorySection>
-        
-        <CategorySection title="Resources">
-          <LinkButton href="/rss" text="RSS" />
-          <LinkButton href="https://lu.ma/swarms_calendar" text="Swarms Calendar" />
-        </CategorySection>
+    <footer className="bg-gradient-to-b from-white to-blue-50">
+      <div className="mx-auto max-w-7xl px-8 py-20">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+          <CategorySection title="Githubs">
+            <LinkButton href="https://github.com/kyegomez" text="Kyes GitHub" />
+            <LinkButton href="https://github.com/Agora-Lab-AI/" text="Agoras GitHub" />
+            <LinkButton href="https://github.com/The-Swarm-Corporation" text="Swarms GitHub" />
+          </CategorySection>
+          
+          <CategorySection title="Resources">
+            <LinkButton href="/rss" text="RSS" />
+            <LinkButton href="https://lu.ma/swarms_calendar" text="Agora Calendar" />
+          </CategorySection>
 
-        <CategorySection title="Blog">
-          <LinkButton href="https://medium.com/@kyeg" text="Medium" />
-          <LinkButton href="https://agoralab.ai" text="Agora Blog" />
-        </CategorySection>
-        
-        <CategorySection title="Contact">
-          <LinkButton href="mailto:kye@kyegomez.com" text="Email" />
-          <LinkButton href="tel:+17866955339" text="786-695-5339" />
-          <LinkButton href="https://cal.com/swarms" text="Book a Meeting" />
-        </CategorySection>
-        
-        <CategorySection title="Support">
-          <LinkButton href="https://github.com/sponsors/kyegomez" text="Sponsor on Github" />
-          <LinkButton href="https://buymeacoffee.com/kyegomez" text="Buy Me a Coffee" />
-          <LinkButton href="https://polar.sh/kyegomez/" text="Fund Issues on Polar" />
-        </CategorySection>
-        <CategorySection title="Company Websites">
-          <LinkButton href="https://swarms.world" text="Swarms" />
-          <LinkButton href="https://agoralab.ai" text="Agora" />
-          <LinkButton href="https://apac.ai" text="APAC AI" />
-        </CategorySection>
+          <CategorySection title="Blog">
+            <LinkButton href="https://medium.com/@kyeg" text="Medium" />
+            <LinkButton href="https://agoralab.ai" text="Agora Blog" />
+          </CategorySection>
+          
+          <CategorySection title="Contact">
+            <LinkButton href="mailto:kye@kyegomez.com" text="Email" />
+            <LinkButton href="tel:+17866955339" text="786-695-5339" />
+            <LinkButton href="https://cal.com/swarms" text="Book a Meeting" />
+          </CategorySection>
+          
+          <CategorySection title="Support">
+            <LinkButton href="https://github.com/sponsors/kyegomez" text="Sponsor on Github" />
+            <LinkButton href="https://buymeacoffee.com/kyegomez" text="Buy Me a Coffee" />
+            <LinkButton href="https://polar.sh/kyegomez/" text="Fund Issues on Polar" />
+          </CategorySection>
+
+          <CategorySection title="Company Websites">
+            <LinkButton href="https://agoralab.ai" text="Agora" />
+            <LinkButton href="https://agoralab.xyz" text="Agora Labs" />
+          </CategorySection>
+        </div>
+        <div className="mt-16 pt-8 border-t border-blue-100">
+          <p className="text-center text-sm text-blue-500 font-medium">
+            © {new Date().getFullYear()} MIT Licensed
+          </p>
+        </div>
       </div>
-      <p className="mt-8 text-center text-sm text-neutral-500 dark:text-neutral-400">
-        © {new Date().getFullYear()} MIT Licensed
-      </p>
     </footer>
   )
 }

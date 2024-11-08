@@ -5,7 +5,7 @@ export function BlogPosts() {
   let allBlogs = getBlogPosts()
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto">
       {allBlogs
         .sort((a, b) => {
           if (
@@ -18,16 +18,19 @@ export function BlogPosts() {
         .map((post) => (
           <Link
             key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
+            className="block mb-6 p-6 rounded-2xl transition-all hover:bg-blue-50 border border-transparent hover:border-blue-100"
             href={`/blog/${post.slug}`}
           >
-            <div className="w-full flex flex-col md:flex-row space-x-0 md:space-x-2">
-              <p className="text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
+            <div className="w-full flex flex-col md:flex-row items-center">
+              <p className="text-sm font-medium text-blue-500 mb-2 md:mb-0 md:w-[120px]">
                 {formatDate(post.metadata.publishedAt, false)}
               </p>
-              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
+              <h3 className="text-lg font-semibold text-gray-900 md:flex-1">
                 {post.metadata.title}
-              </p>
+              </h3>
+              <svg className="w-5 h-5 text-blue-400 hidden md:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </div>
           </Link>
         ))}
